@@ -122,7 +122,7 @@ class Review:
         if isinstance(value, int) and value >= 2000:
             self._year = value
         else:
-            raise ValueError("Year must be an integer >= 2000")  # <- ValueError
+            raise ValueError("Year must be an integer >= 2000")
 
     @property
     def summary(self):
@@ -133,11 +133,16 @@ class Review:
         if isinstance(value, str) and len(value) > 0:
             self._summary = value
         else:
-            raise ValueError("Summary must be a non-empty string")  # <- ValueError
+            raise ValueError("Summary must be a non-empty string")
 
     @property
+    def employee_id(self):
+        return self._employee_id
+
+    @employee_id.setter
     def employee_id(self, value):
+        from employee import Employee   
         if isinstance(value, int) and Employee.find_by_id(value):
             self._employee_id = value
         else:
-            raise ValueError("Employee must exist in database")  # <- ValueError
+            raise ValueError("employee_id must reference a persisted Employee")
